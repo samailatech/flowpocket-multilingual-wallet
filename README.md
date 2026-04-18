@@ -52,6 +52,39 @@ Local defaults:
 
 The API reads its local connection details from `services/api/.env`.
 
+## Local Startup Order
+
+Use the project root for local development:
+
+```bash
+cd /home/samaila/Desktop/projects/digital-wallet-p2p-app
+```
+
+If you want to start everything together:
+
+```bash
+npm run dev:full
+```
+
+That will:
+
+1. start the local PostgreSQL container
+2. start the API on `http://localhost:4000`
+3. start the web app on `http://localhost:3000`
+
+If the database schema has not been loaded yet, run this once first:
+
+```bash
+npm run db:init
+```
+
+You can also run the app pieces separately:
+
+```bash
+npm run dev:api
+npm run dev:web
+```
+
 ## Recruiter Summary
 
 Built a P2P payment app with wallet funding, transaction PIN, and real-time notifications serving 100+ test users.

@@ -33,7 +33,11 @@ export default function LoginPage() {
       localStorage.setItem('flowpocket_token', payload.token);
       router.push('/dashboard');
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : 'Unable to sign in.');
+      if (submitError instanceof TypeError) {
+        setError('Unable to reach the wallet API. Start the backend on http://localhost:4000 and try again.');
+      } else {
+        setError(submitError instanceof Error ? submitError.message : 'Unable to sign in.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -66,4 +70,3 @@ export default function LoginPage() {
     </main>
   );
 }
-

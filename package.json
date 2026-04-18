@@ -9,12 +9,14 @@
   ],
   "scripts": {
     "db:start": "docker compose up -d postgres",
-    "db:init": "sh -c 'docker exec -i digital-wallet-postgres psql -U wallet -d digital_wallet < packages/db/schema.sql'",
+    "db:init": "sh -c 'docker exec digital-wallet-postgres psql -U wallet -d postgres -tc \"SELECT 1 FROM pg_database WHERE datname = '\\''digital_wallet'\\''\" | grep -q 1 || docker exec digital-wallet-postgres psql -U wallet -d postgres -c \"CREATE DATABASE digital_wallet\"; docker exec -i digital-wallet-postgres psql -U wallet -d digital_wallet < packages/db/schema.sql'",
     "db:stop": "docker compose down",
-    "dev:web": "npm --workspace apps/web run dev",
+    "dev:all": "sh -c 'npm run dev:api & npm run dev:web & wait'",
+    "dev:full": "sh -c 'npm run db:start && sleep 3 && npm run db:init && npm run dev:all'",
+    "dev:web": "npm --prefix apps/web run dev",
     "dev:mobile": "npm --workspace apps/mobile run start",
-    "dev:api": "npm --workspace services/api run dev",
-    "build:web": "npm --workspace apps/web run build",
-    "start:api": "npm --workspace services/api run start"
+    "dev:api": "npm --prefix services/api run dev",
+    "build:web": "npm --prefix apps/web run build",
+    "start:api": "npm --prefix services/api run start"
   }
 }
