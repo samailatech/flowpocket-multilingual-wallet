@@ -88,3 +88,4 @@ npm run dev:web
 ## Recruiter Summary
 
 Built a P2P payment app with wallet funding, transaction PIN, and real-time notifications serving 100+ test users.
+# flowpocket-multilingual-wallet
