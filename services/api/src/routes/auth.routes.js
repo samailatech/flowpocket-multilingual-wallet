@@ -96,4 +96,3 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/me', requireAuth, async (req, res) => {
   return res.json({ user: req.user });
 });
-console.error('Register error:', error)
