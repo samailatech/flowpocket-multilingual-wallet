@@ -90,4 +90,3 @@ export async function withTransaction(callback) {
     client.release();
   }
 }
-console.error('Register error:', error)
