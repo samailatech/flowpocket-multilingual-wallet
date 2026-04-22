@@ -1,3 +1,5 @@
+console.error('Register error:', error)
+
 import { Router } from 'express';
 
 import { query } from '../lib/db.js';
@@ -38,6 +40,8 @@ authRouter.post('/register', async (req, res) => {
       },
     });
   } catch (error) {
+    console.error('Register error:', error);
+
     if (error.code === '23505') {
       return res.status(409).json({ error: 'A user with that email or phone already exists.' });
     }
@@ -86,6 +90,7 @@ authRouter.post('/login', async (req, res) => {
       },
     });
   } catch (error) {
+    console.error('Login error:', error);
     return res.status(500).json({ error: 'Unable to sign in.' });
   }
 });
@@ -93,4 +98,3 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/me', requireAuth, async (req, res) => {
   return res.json({ user: req.user });
 });
-

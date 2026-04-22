@@ -42,7 +42,11 @@ export default function RegisterPage() {
       router.push('/dashboard');
     } catch (submitError) {
       if (submitError instanceof TypeError) {
-        setError('Unable to reach the wallet API. Start the backend on http://localhost:4000 and try again.');
+        setError(
+          process.env.NODE_ENV === 'development'
+            ? 'Unable to reach the wallet API. Start the backend on http://localhost:4000 and try again.'
+            : 'Unable to reach the wallet service right now. Please try again in a moment.'
+        );
       } else {
         setError(submitError instanceof Error ? submitError.message : 'Unable to create account.');
       }
