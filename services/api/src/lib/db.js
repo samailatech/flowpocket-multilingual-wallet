@@ -1,5 +1,3 @@
-console.error('Register error:', error)
-
 import { Pool } from 'pg';
 
 let pool;
@@ -92,3 +90,4 @@ export async function withTransaction(callback) {
     client.release();
   }
 }
+console.error('Register error:', error)

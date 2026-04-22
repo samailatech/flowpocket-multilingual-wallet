@@ -1,5 +1,3 @@
-console.error('Register error:', error)
-
 import { Router } from 'express';
 
 import { query } from '../lib/db.js';
@@ -98,3 +96,4 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/me', requireAuth, async (req, res) => {
   return res.json({ user: req.user });
 });
+console.error('Register error:', error)
